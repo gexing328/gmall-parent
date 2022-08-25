@@ -2,6 +2,7 @@ package com.atguigu.gmall.product.mapper;
 
 import com.atguigu.gmall.model.product.SkuInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author 葛星
@@ -10,6 +11,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.atguigu.gmall.product.domain.SkuInfo
 */
 public interface SkuInfoMapper extends BaseMapper<SkuInfo> {
+
+    /**
+     * 更新 sku的is_sale字段
+     * @param skuId
+     * @param sale
+     */
+    void updateIsSale(@Param("skuId") Long skuId,
+                      @Param("sale") int sale);
 
 }
 

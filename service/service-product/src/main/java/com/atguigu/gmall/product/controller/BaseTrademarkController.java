@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 品牌API
  */
@@ -68,9 +70,24 @@ public class BaseTrademarkController {
         return Result.ok();
     }
     // /baseTrademark/remove/2
+
+    /**
+     * 删除品牌
+     * @param tid
+     * @return
+     */
     @DeleteMapping("/baseTrademark/remove/{tid}")
     public Result deleteBaseTrademark(@PathVariable("tid")Long tid){
         baseTrademarkService.removeById(tid);
         return Result.ok();
+    }
+    /**
+     * 获取所有品牌
+     * @return
+     */
+    @GetMapping("/baseTrademark/getTrademarkList")
+    public Result getTrademarkList(){
+        List<BaseTrademark> list = baseTrademarkService.list();
+        return Result.ok(list);
     }
 }
