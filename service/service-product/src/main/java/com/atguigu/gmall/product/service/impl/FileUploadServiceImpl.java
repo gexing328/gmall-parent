@@ -63,7 +63,7 @@ public class FileUploadServiceImpl implements FileUploadService {
                 dateStr+"/"+filename, //自己指定的唯一名
                 inputStream,
                 options
-                );
+        );
 
 
         //5、http://192.168.200.100:9000/gmall/filename

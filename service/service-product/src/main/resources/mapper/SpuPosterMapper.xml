@@ -9,7 +9,6 @@
             <result property="spuId" column="spu_id" jdbcType="BIGINT"/>
             <result property="imgName" column="img_name" jdbcType="VARCHAR"/>
             <result property="imgUrl" column="img_url" jdbcType="VARCHAR"/>
-
     </resultMap>
 
     <sql id="Base_Column_List">

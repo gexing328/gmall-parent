@@ -5,14 +5,15 @@
 <mapper namespace="com.atguigu.gmall.product.mapper.BaseAttrInfoMapper">
 
     <resultMap id="BaseResultMap" type="com.atguigu.gmall.model.product.BaseAttrInfo">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="attrName" column="attr_name" jdbcType="VARCHAR"/>
-            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
-            <result property="categoryLevel" column="category_level" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="attrName" column="attr_name" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+        <result property="categoryLevel" column="category_level" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,attr_name,category_id,
+        id
+        ,attr_name,category_id,
         category_level
     </sql>
 
@@ -44,14 +45,22 @@
             <!--            <result column="attr_id" property="attrId"></result>-->
         </collection>
     </resultMap>
+
     <select id="getAttrInfoAndValueByCategoryId"
             resultMap="AttrInfoAndValue">
         select bai.*,bav.id vid,bav.value_name,bav.attr_id
         from base_attr_info bai
-                 left join base_attr_value bav on bai.id = bav.attr_id
-        where
-            (bai.category_id=#{c1Id} and bai.category_level=1)
-           or (bai.category_id=#{c2Id} and bai.category_level=2)
-           or (bai.category_id=#{c3Id} and bai.category_level=3)
+        left join base_attr_value bav on bai.id = bav.attr_id
+        <where>
+            <if test="c1Id != 0">
+                (bai.category_id=#{c1Id} and bai.category_level=1)
+            </if>
+            <if test="c2Id != 0">
+                or (bai.category_id=#{c2Id} and bai.category_level=2)
+            </if>
+            <if test="c3Id != 0">
+                or (bai.category_id=#{c3Id} and bai.category_level=3)
+            </if>
+        </where>
     </select>
 </mapper>
