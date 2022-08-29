@@ -118,6 +118,14 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
                 .getSaleAttrAndValueMarkSku(skuInfo.getSpuId(),skuId);
         detailTo.setSpuSaleAttrList(saleAttrList);
 
+
+        //(√)5、商品sku的所有兄弟产业的销售属性名和值组合的关系全部查出来，并封装成
+        //{"119|120":"50","119"|"121"}这样的json的字符串
+        Long spuId = skuInfo.getSpuId();
+        String valuejson=spuSaleAttrService.getAllSkuSaleAttrValueJson(spuId);
+        detailTo.setValuesSkuJson(valuejson);
+
+        //以下不用管
         //5、商品（sku）类似推荐    （x）
         //6、商品（sku）介绍[所属的spu的海报]        spu_poster（x）
         //7、商品（sku）的规格参数                  sku_attr_value
@@ -132,6 +140,18 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
         //性能低下
         BigDecimal price = skuInfoMapper.getRealPrice(skuId);
         return price;
+    }
+
+    @Override
+    public SkuInfo getDetailSkuInfo(Long skuId) {
+        SkuInfo skuInfo = skuInfoMapper.selectById(skuId);
+        return skuInfo;
+    }
+
+    @Override
+    public List<SkuImage> getDetailSkuImages(Long skuId) {
+        List<SkuImage> imageList = skuImageService.getSkuImage(skuId);
+        return imageList;
     }
 }
 
