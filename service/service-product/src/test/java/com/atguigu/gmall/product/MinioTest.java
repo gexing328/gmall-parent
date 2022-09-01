@@ -1,4 +1,4 @@
-package product;
+package com.atguigu.gmall.product;
 
 import io.minio.MinioClient;
 import io.minio.PutObjectOptions;
@@ -42,11 +42,11 @@ public class MinioTest {
              * String bucketName, 桶名
              * String objectName, 对象名，也就是文件名
              *
-             * InputStream stream, 文件流  E:\08-尚品汇\资料\03 商品图片\品牌\pingguo.png
+             * InputStream stream, 文件流  D:\0310\尚品汇\资料\03 商品图片\品牌\pingguo.png
              * PutObjectOptions options, 上传的参数设置
              */
             //文件流
-            FileInputStream inputStream = new FileInputStream("E:\\08-尚品汇\\资料\\03 商品图片\\品牌\\pingguo.png");
+            FileInputStream inputStream = new FileInputStream("D:\\0310\\尚品汇\\资料\\03 商品图片\\品牌\\pingguo.png");
             //文件上传参数：long objectSize, long partSize
             PutObjectOptions options = new PutObjectOptions(inputStream.available(), -1L);
             options.setContentType("image/png");
